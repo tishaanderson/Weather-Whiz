@@ -18,7 +18,7 @@ You will use `localStorage` to store any persistent data. For more information o
 AS A traveler
 I WANT to see the weather outlook for multiple cities
 SO THAT I can plan a trip accordingly
-``
+```
 
 #### Acceptance Criteria
 
@@ -35,6 +35,10 @@ THEN I am again presented with current and future conditions for that city
 ```
 
 ##### Links
+
+https://github.com/tishaanderson/Weather-Whiz
+
+
 
 ###### Demo
 
