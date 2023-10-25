@@ -83,7 +83,7 @@ var weekURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&l
       console.log(data);
 
       var weekForecastElement = document.getElementById("week-forecast");
-      weekForecastElement.innerHTML = "Weekly forecast for " + city + ":";
+      weekForecastElement.innerHTML = "Weekly forecast for " + data.city.name + ":";
 
       // document.querySelectorAll('.forecast-day').innerHTML = data.date;
       // document.querySelectorAll('.forecast-temp').innerHTML = "<p>Temp: " + data.main.temp + " F</p>";
@@ -96,7 +96,7 @@ var weekURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&l
       var humidityElements = document.querySelectorAll(".forecast-humidity");
       var windElements = document.querySelectorAll(".forecast-wind");
 
-      if (data.list.length < 5 * 8) {
+      if (data.list.length < 5) {
         weekForecastElement.innerHTML +=
           "<p>Not enough data for the next 5 days.<p>";
         return;
@@ -105,7 +105,8 @@ var weekURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&l
       for (var i = 0; i < 5; i++) {
         if (data.list[i].dt_txt.includes("12:00:00")) {
           console.log(data.list[i]);
-          var dayData = data.list[i * 8];
+
+          var dayData = data.list[i];
 
           var date = new Date(dayData.dt * 1000);
           var temp = dayData.main.temp;
