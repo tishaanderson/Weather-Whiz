@@ -1,0 +1,12 @@
+main {
+  display: inline-block;
+  width: 80%;
+}
+
+aside {
+  display: inline-block;
+  width: 15%;
+  vertical-align: top;
+  border: solid;
+  border-width: 1px;
+}
