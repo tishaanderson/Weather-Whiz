@@ -17,6 +17,11 @@ function updateSearchHistory(city) {
   }
 }
 
+function onClickCity() {
+  console.log(this);
+  searchWeather(this.textContent);
+}
+
 //function to load and display the search history to the container
 function loadSearchHistory() {
   var searchHistoryList = document.querySelector("#keyword-list");
@@ -27,10 +32,7 @@ function loadSearchHistory() {
   for (var i = 0; i < history.length; i++) {
     var listItem = document.createElement("li");
     listItem.textContent = history[i];
-    listItem.addEventListener("click", () => {
-      // userCityInput.value = history[i];
-      searchWeather(history[i]);
-    });
+    listItem.onclick = onClickCity;
     searchHistoryList.appendChild(listItem);
   }
 }
@@ -102,7 +104,9 @@ var weekURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&l
         return;
       }
 
-      for (var i = 0; i < 5; i++) {
+      var cardIndex = 0;
+
+      for (var i = 0; i < data.list.length; i++) {
         if (data.list[i].dt_txt.includes("12:00:00")) {
           console.log(data.list[i]);
 
@@ -113,10 +117,17 @@ var weekURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&l
           var humidity = dayData.main.humidity;
           var wind = dayData.wind.speed;
 
-          dayElements[i].textContent = date.toLocaleDateString();
-          tempElements[i].textContent = "Temp: " + temp + " F";
-          humidityElements[i].textContent = "Humidity: " + humidity + "%";
-          windElements[i].textContent = "Wind: " + wind + " MPH";
+          var currentWeatherData = dayData.weather[0].icon;
+          var icon =
+        "https://openweathermap.org/img/wn/" + currentWeatherData + ".png";
+      document.querySelectorAll(".forecast-icon")[cardIndex].src = icon;
+
+          dayElements[cardIndex].textContent = date.toLocaleDateString();
+          tempElements[cardIndex].textContent = "Temp: " + temp + " F";
+          humidityElements[cardIndex].textContent = "Humidity: " + humidity + "%";
+          windElements[cardIndex].textContent = "Wind: " + wind + " MPH";
+          cardIndex++;
+          
         }
       }
     })
@@ -146,11 +157,11 @@ function searchWeather(city) {
       weeklyForecast(city);
       document.querySelector(".card-title").innerHTML =
         "Current weather for " + data.name + ":";
-      document.querySelector(".today-temp").innerHTML +=
+      document.querySelector(".today-temp").innerHTML =
         "<p>Temp: " + data.main.temp + " F</p>";
-      document.querySelector(".today-humidity").innerHTML +=
+      document.querySelector(".today-humidity").innerHTML =
         "<p>Humidity: " + data.main.humidity + "%</p>";
-      document.querySelector(".today-wind").innerHTML +=
+      document.querySelector(".today-wind").innerHTML =
         "<p>Wind: " + data.wind.speed + " MPH</p>";
 
       var currentWeatherData = data.weather[0].icon;
