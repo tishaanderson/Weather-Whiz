@@ -42,3 +42,4 @@ https://github.com/tishaanderson/Weather-Whiz
 
 ###### Demo
 
+![Weather Whiz Demo Screenshot](assets/images/weather-whiz-screenshot.png)
